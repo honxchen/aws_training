@@ -1,0 +1,42 @@
+version: '2.0'
+services:
+  wordpress:
+    image: "wordpress"
+    ports:
+    - "9099:80"
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: exampleuser
+      WORDPRESS_DB_PASSWORD: examplepass
+      WORDPRESS_DB_NAME: exampledb
+    depends_on:
+    - db
+    networks:
+    - blogUI
+
+
+  db:
+    image: 'mysql:5.7'
+    environment:
+      MYSQL_DATABASE: exampledb
+      MYSQL_USER: exampleuser
+      MYSQL_PASSWORD: examplepass
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    networks:
+    - blogUI
+    - dbUI
+
+  dbadmin:
+    image: 'phpmyadmin/phpmyadmin'
+    ports:
+    - "8088:80"
+    links:
+    - db
+    networks:
+    - dbUI
+
+
+
+networks:
+  blogUI:
+  dbUI:
