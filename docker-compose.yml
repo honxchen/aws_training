@@ -35,8 +35,20 @@ services:
     networks:
     - dbUI
 
+  nginx:
+    build: ./nginx
+    ports:
+      - "8080:80"
+    depends_on:
+    - wordpress
+    - dbadmin
+    networks:
+      - blogUI
+      - dbUI
 
 
 networks:
   blogUI:
+    driver: bridge
   dbUI:
+    driver: bridge
