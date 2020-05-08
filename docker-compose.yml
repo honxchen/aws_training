@@ -1,9 +1,11 @@
 version: '2.0'
 services:
   wordpress:
-    image: "wordpress"
+    image: "wordpress:4.5.2-fpm"
     ports:
-    - "9099:80"
+    - "9099:9000"
+    volumes:
+      - ./wordpress-data:/var/www/html
     environment:
       WORDPRESS_DB_HOST: db
       WORDPRESS_DB_USER: exampleuser
@@ -39,13 +41,21 @@ services:
     build: ./nginx
     ports:
       - "8080:80"
+    volumes:
+    - ./wordpress-data:/var/www/html:ro
     depends_on:
-    - wordpress
-    - dbadmin
+      - wordpress
+      - dbadmin
+    links:
+      - wordpress
+      - dbadmin
     networks:
       - blogUI
       - dbUI
 
+volumes:
+  wordpress-data:
+    driver: local
 
 networks:
   blogUI:
