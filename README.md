@@ -18,4 +18,4 @@ docker-compose down
 
 ## relationship between containers
 
-![relationship between containers](https://github.com/honxchen/aws_training/containers.png)
+![relationship between containers](https://github.com/honxchen/aws_training/blob/master/containers.png)
