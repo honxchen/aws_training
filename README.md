@@ -15,3 +15,7 @@ docker-compose down
 
 ## open db admin ui
 > http://127.0.0.1:8088/
+
+## relationship between containers
+
+![relationship between containers](https://github.com/honxchen/aws_training/containers.png)
